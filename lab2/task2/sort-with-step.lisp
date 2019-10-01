@@ -3,7 +3,7 @@
 (defun sort-with-step-until(i step l &optional (j i))
     (cond
         ((< j 0) l)
-        ((< (nth i l) (nth j l)) (sort-with-step-until j step (swap l i j) (- j step)))
+        ((< (nth i l) (nth j l)) (sort-with-step-until j step (swap i j l) (- j step)))
         (t (sort-with-step-until i step l (- j step)))))
 
 (defun sort-with-step(step l &optional (i 0))

@@ -9,7 +9,6 @@
 (defun shell-sort(l)
     (sort-by-inc-steps (inc-steps (length l)) l))
 
-
 (defparameter test-list '(10 9 8 7 6 5 4 3 2 1))
 
 (write test-list)
