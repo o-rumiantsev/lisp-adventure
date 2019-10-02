@@ -1,4 +1,4 @@
-(load "./utils.lisp")
+(load "./utils.lsp")
 
 (defun sort-with-step-until(i step l &optional (j i))
     (cond

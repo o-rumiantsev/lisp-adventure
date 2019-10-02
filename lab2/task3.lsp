@@ -1,4 +1,4 @@
-(load "./task2/utils.lisp")
+(load "./task2/utils.lsp")
 
 (defun bin-search(l key right &optional (left -1))
     (cond

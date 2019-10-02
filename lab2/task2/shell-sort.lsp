@@ -1,5 +1,5 @@
-(load "./inc-steps.lisp")
-(load "./sort-with-step.lisp")
+(load "./inc-steps.lsp")
+(load "./sort-with-step.lsp")
 
 (defun sort-by-inc-steps(steps l)
     (cond
