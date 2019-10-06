@@ -16,4 +16,5 @@
 (defun task2(l1 l2 l3) (
     list (car (cdr l1)) (car (cdr l2)) (car (cdr (cdr l3)))
 ))
+
 (write (task2 '(Y U I) '(G1 G2 G3) '(KK LL MM JJJ)))

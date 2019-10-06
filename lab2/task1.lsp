@@ -18,4 +18,5 @@
         ((eq index 0) (cons element list))
         (t (cons (car list) (insert element (- index 1) (cdr list))))))
 
-(write (insert 10 1 '(1 2 3)))
+(write (insert 10 3 '(1 2 3)))
+(terpri)
