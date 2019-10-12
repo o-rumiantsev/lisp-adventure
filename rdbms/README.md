@@ -3,7 +3,7 @@
 Document-oriented DBMS with SQL-like query syntax written
 in Lisp without any variable.
 
-#### Startup
+## Startup
 
 ```bash
 $ sbcl --script cli.lsp
@@ -29,7 +29,7 @@ Database:
   DELETE <name> <conditions>               delete data from table
 ```
 
-#### Commands
+## Commands
 
 Available commands:
 
@@ -45,7 +45,7 @@ Available commands:
 * [DELETE](#delete)
 
 
-##### EXIT
+### EXIT
 
 __Description__: Closes CLI
 
@@ -58,7 +58,7 @@ __Example__:
 bye
 ```
 
-##### SAVE
+### SAVE
 
 __Description__: Saves current database context to file
 
@@ -71,7 +71,7 @@ __Example__:
 Saved db to "db.data"
 ```
 
-##### LOAD
+### LOAD
 
 __Description__: Loads database context from file
 
@@ -84,7 +84,7 @@ __Example__:
 Loaded db from "db.data"
 ```
 
-##### LIST TABLES
+### LIST TABLES
 
 __Description__: List all tables' names from current database context
 
@@ -99,7 +99,7 @@ EXAMPLE2
 EXAMPLE3
 ```
 
-##### CREATE TABLE
+### CREATE TABLE
 
 __Description__: Create table in current database context
 
@@ -118,7 +118,7 @@ __Example__:
 CREATED TABLE EXAMPLE1
 ```
 
-##### DROP TABLE
+### DROP TABLE
 
 __Description__: Drop table in current database context
 
@@ -131,7 +131,7 @@ __Example__:
 DROPPED TABLE EXAMPLE1
 ```
 
-##### SELECT
+### SELECT
 
 __Description__: Select rows from table in current database context
 
@@ -150,7 +150,7 @@ __Example__:
 (25 "string3" t)
 ```
 
-##### INSERT
+### INSERT
 
 __Description__: Insert row to table in current database context
 
@@ -177,7 +177,7 @@ be inserted.
 (25 "string3" t)
 ```
 
-##### UPDATE
+### UPDATE
 
 __Description__: Update rows in table in current database context
 
@@ -199,7 +199,7 @@ accept given conditions
 __*Note*__: If table schema is not accepting mapped row, row is 
 not updated.
 
-##### DELETE
+### DELETE
 
 __Description__: Delete rows from table in current database context
 
@@ -214,13 +214,13 @@ __Example__:
 DELETED (15 "string2" nil)
 ```
 
-#### Definitions
+## Definitions
 
-##### String
+#### String
 
 Lisp string object(e.g. `"some string"`).
 
-##### Symbol
+#### Symbol
 
 Lisp symbol object(e.g. `some-symbol`).
 
@@ -228,7 +228,7 @@ Lisp symbol object(e.g. `some-symbol`).
 
 Lisp list object(e.g. `(1 2 3)`).
 
-##### Schema
+#### Schema
 
 Table schema is a list of lists, where each list is
 a field definition. First item of field definition is 
@@ -236,7 +236,7 @@ field name, and second is field's type: `((<name> <type>) ...)`.
 
 Valid types for table schema is: `number`, `string` and `bool`.
 
-##### Conditions
+#### Conditions
 
 Conditions is a composition of logical functions,
 which might return `t` or `nil`. One more feature here is field
@@ -247,14 +247,14 @@ schema `(number-field string-field bool-field)` condition
 `(> number-field 10)` will be `(> 10 10)` and will evaluate 
 to `nil`.
 
-##### Ordering
+#### Ordering
 
 Ordering is a list of lists - order definitions.
 Order definition has a first list item as a field name and second, optional,
 list item as an sorting order(`desc` for descending, `asc` 
 for ascending, default).
 
-##### Mappings
+#### Mappings
 
 Mappings is a list of lists - field map definitions.
 Field map definition has a first list item as a field name
