@@ -2,28 +2,25 @@
 (load "./fs.lsp")
 
 (defun process-create(db cmd-type)
-  (cond
-    ((null (equal cmd-type 'TABLE))
-      (format t "Try: CREATE TABLE <name> <schema>~%")))
-  (cond
-    ((equal cmd-type 'TABLE) (db-create-table db (read) (read)))
-    (t db)))
+  (if (null (equal cmd-type 'TABLE)) 
+      (format t "Try: CREATE TABLE <name> <schema>~%"))
+  (if (equal cmd-type 'TABLE) 
+    (db-create-table db (read) (read))
+    db))
 
 (defun process-drop(db cmd-type)
-  (cond
-    ((null (equal cmd-type 'TABLE))
-      (format t "Try: DROP TABLE <name>~%")))
-  (cond
-    ((equal cmd-type 'TABLE) (db-drop-table db (read)))
-    (t db)))
+  (if (null (equal cmd-type 'TABLE))
+      (format t "Try: DROP TABLE <name>~%"))
+  (if (equal cmd-type 'TABLE)
+    (db-drop-table db (read))
+    db))
 
 (defun process-insert(db cmd-type)
-  (cond
-    ((null (equal cmd-type 'INTO))
-      (format t "Try: INSERT INTO <name> <values>~%")))
-  (cond
-    ((equal cmd-type 'INTO) (db-table-insert db (read) (read)))
-    (t db)))
+  (if (null (equal cmd-type 'INTO))
+      (format t "Try: INSERT INTO <name> <values>~%"))
+  (if (equal cmd-type 'INTO) 
+    (db-table-insert db (read) (read))
+    db))
 
 (defun process-update(db table-name)
   (db-table-update db table-name (read) (read)))
@@ -39,11 +36,9 @@
         (read)) (read))))
 
 (defun process-list(db cmd-type)
-  (cond
-    ((null (equal cmd-type 'TABLES))
-      (format t "Try: LIST TABLES~%")))
-  (cond
-    ((equal cmd-type 'TABLES) (db-list-tables db))))
+  (if (null (equal cmd-type 'TABLES))
+      (format t "Try: LIST TABLES~%")
+      (db-list-tables db)))
 
 (defun process-save(db filename)
   (write-file filename db)
@@ -85,18 +80,22 @@
     ((equal cmd 'SAVE)   (process-save   db (read)))
     ((equal cmd 'HELP)   (help)))
   (cond
-    ((equal cmd 'EXIT) (write-line "bye"))
-    ((equal cmd 'LOAD)   (process-command (process-load      (read)) (read-command)))
-    ((equal cmd 'CREATE) (process-command (process-create db (read)) (read-command)))
-    ((equal cmd 'DROP)   (process-command (process-drop   db (read)) (read-command)))
-    ((equal cmd 'INSERT) (process-command (process-insert db (read)) (read-command)))
-    ((equal cmd 'UPDATE) (process-command (process-update db (read)) (read-command)))
-    ((equal cmd 'DELETE) (process-command (process-delete db (read)) (read-command)))
-    (t (process-command db (read-command)))))
+    ((equal cmd 'LOAD)   (process-load      (read)))
+    ((equal cmd 'CREATE) (process-create db (read)))
+    ((equal cmd 'DROP)   (process-drop   db (read)))
+    ((equal cmd 'INSERT) (process-insert db (read)))
+    ((equal cmd 'UPDATE) (process-update db (read)))
+    ((equal cmd 'DELETE) (process-delete db (read)))
+    (t db)))
+
+(defun process-command-loop(db)
+  (setq cmd (read-command))
+  (if (equal cmd 'EXIT) (write-line "bye")
+  (process-command-loop (process-command db cmd))))
 
 (defun cli(db)
   (write-line "Welcome to LiSQL CLI")
   (help)
-  (process-command db (read-command)))
+  (process-command-loop db))
 
 (cli (create-db))
